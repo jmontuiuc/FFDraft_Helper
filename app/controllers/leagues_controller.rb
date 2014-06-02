@@ -35,6 +35,7 @@ class LeaguesController < ApplicationController
     @league.ReYd = params[:ReYd]
     @league.Fum = params[:Fum]
     @league.Comp = params[:Comp]
+    @league.user_id = current_user.id
 
     if @league.save
       redirect_to "/leagues", :notice => "League created successfully."
@@ -72,6 +73,7 @@ class LeaguesController < ApplicationController
     @league.ReYd = params[:ReYd]
     @league.Fum = params[:Fum]
     @league.Comp = params[:Comp]
+    @league.user_id = current_user.id
 
     if @league.save
       redirect_to "/leagues", :notice => "League updated successfully."
