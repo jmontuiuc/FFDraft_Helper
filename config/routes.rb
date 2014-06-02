@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  devise_for :users
+  root 'leagues#index'
+
   # Routes for the League resource:
   # CREATE
   get('/leagues/new', { :controller => 'leagues', :action => 'new' })
@@ -17,8 +20,7 @@ Rails.application.routes.draw do
   get('/delete_league/:id', { :controller => 'leagues', :action => 'destroy' })
   #------------------------------
 
-  devise_for :users
-  get('/', { :controller => 'ffdraft', :action => 'index' })
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

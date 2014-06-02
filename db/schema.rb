@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140602022935) do
+ActiveRecord::Schema.define(version: 20140602041620) do
 
   create_table "leagues", force: true do |t|
     t.string   "league_name"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20140602022935) do
     t.float    "Comp"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "users", force: true do |t|
