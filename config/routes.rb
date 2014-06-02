@@ -1,5 +1,22 @@
 Rails.application.routes.draw do
 
+  # Routes for the League resource:
+  # CREATE
+  get('/leagues/new', { :controller => 'leagues', :action => 'new' })
+  get('/create_league', { :controller => 'leagues', :action => 'create' })
+
+  # READ
+  get('/leagues', { :controller => 'leagues', :action => 'index' })
+  get('/leagues/:id', { :controller => 'leagues', :action => 'show' })
+
+  # UPDATE
+  get('/leagues/:id/edit', { :controller => 'leagues', :action => 'edit' })
+  get('/update_league/:id', { :controller => 'leagues', :action => 'update' })
+
+  # DELETE
+  get('/delete_league/:id', { :controller => 'leagues', :action => 'destroy' })
+  #------------------------------
+
   devise_for :users
   get('/', { :controller => 'ffdraft', :action => 'index' })
   # The priority is based upon order of creation: first created -> highest priority.

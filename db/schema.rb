@@ -11,7 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140601234442) do
+ActiveRecord::Schema.define(version: 20140602022935) do
+
+  create_table "leagues", force: true do |t|
+    t.string   "league_name"
+    t.integer  "QB_start"
+    t.integer  "RB_start"
+    t.integer  "WR_start"
+    t.integer  "TE_start"
+    t.integer  "Flex_start"
+    t.integer  "K_start"
+    t.integer  "Def_start"
+    t.float    "Start_percent"
+    t.integer  "Teams"
+    t.integer  "Budget"
+    t.integer  "Bench"
+    t.float    "PaTd"
+    t.float    "PaYd"
+    t.float    "PaInt"
+    t.float    "RuTd"
+    t.float    "RuYd"
+    t.float    "Rec"
+    t.float    "RecTd"
+    t.float    "ReYd"
+    t.float    "Fum"
+    t.float    "Comp"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

@@ -1,0 +1,254 @@
+<div class="page-header">
+  <h1>Add League</h1>
+</div>
+
+<% if @league.errors.any? %>
+  <% @league.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+  <section class="instructions">
+    <h2>Instructions:</h2>
+    <ol>
+      <li>Fill in your roster info below. This version uses estimates for VBD, so you do not need to calculate yourself</li>
+      <li>Fill out the number of teams in your league and the budget of each team</li>
+      <li>Enter your scoring settings</li>
+      <li>Choose a Starter and Bench Budget %. A balanced valuation will make value for starters and bench players more equal. A larger Starter % is good for a Stars & Scrubs draft approach. If prices look weird, it's probably because your Starter % is too high or too low. Starter % should be larger than Bench %</li>
+      <li>After clicking process, there will be two links based on your draft style:
+        <dd><strong>Auction:</strong> The projected value of each player is displayed. To use during an auction, enter the amount a player was drafted for in "Paid". This can be used for keepers (enter kept $ amount before draft, mark Keeper as "Yes") or in-draft. Inflation will be calculated on the fly and inflated (or deflated) player values will be shown to the right. You can also keep track of your team and your remaining budget throughout the draft. </dd>
+        <dd><strong>Snake:</strong> Players will be sorted and ranked by the Top 300 players and by each position. You will be able to keep track of players remaining in the draft by assigning each player to an oppononent's team or your team.</dd>
+      </li>
+    </ol>
+  </section>
+
+<form action="/create_league" class="form-horizontal">
+  <!-- Label and input for league_name -->
+  <div class="form-group">
+    <label for="league_name" class="col-sm-2 control-label">
+      League name
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="league_name" name="league_name" placeholder="League name" class="form-control" value="<%= @league.league_name %>">
+    </div>
+  </div>
+
+  <!-- Label and input for QB_start -->
+  <div class="form-group">
+    <label for="QB_start" class="col-sm-2 control-label">
+      Qb start
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="QB_start" name="QB_start" placeholder="Qb start" class="form-control" value="<%= @league.QB_start %>">
+    </div>
+  </div>
+
+  <!-- Label and input for RB_start -->
+  <div class="form-group">
+    <label for="RB_start" class="col-sm-2 control-label">
+      Rb start
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="RB_start" name="RB_start" placeholder="Rb start" class="form-control" value="<%= @league.RB_start %>">
+    </div>
+  </div>
+
+  <!-- Label and input for WR_start -->
+  <div class="form-group">
+    <label for="WR_start" class="col-sm-2 control-label">
+      Wr start
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="WR_start" name="WR_start" placeholder="Wr start" class="form-control" value="<%= @league.WR_start %>">
+    </div>
+  </div>
+
+  <!-- Label and input for TE_start -->
+  <div class="form-group">
+    <label for="TE_start" class="col-sm-2 control-label">
+      Te start
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="TE_start" name="TE_start" placeholder="Te start" class="form-control" value="<%= @league.TE_start %>">
+    </div>
+  </div>
+
+  <!-- Label and input for Flex_start -->
+  <div class="form-group">
+    <label for="Flex_start" class="col-sm-2 control-label">
+      Flex start
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="Flex_start" name="Flex_start" placeholder="Flex start" class="form-control" value="<%= @league.Flex_start %>">
+    </div>
+  </div>
+
+  <!-- Label and input for K_start -->
+  <div class="form-group">
+    <label for="K_start" class="col-sm-2 control-label">
+      K start
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="K_start" name="K_start" placeholder="K start" class="form-control" value="<%= @league.K_start %>">
+    </div>
+  </div>
+
+  <!-- Label and input for Def_start -->
+  <div class="form-group">
+    <label for="Def_start" class="col-sm-2 control-label">
+      Def start
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="Def_start" name="Def_start" placeholder="Def start" class="form-control" value="<%= @league.Def_start %>">
+    </div>
+  </div>
+
+  <!-- Label and input for Start_percent -->
+  <div class="form-group">
+    <label for="Start_percent" class="col-sm-2 control-label">
+      Start percent
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="Start_percent" name="Start_percent" placeholder="Start percent" class="form-control" value="<%= @league.Start_percent %>">
+    </div>
+  </div>
+
+  <!-- Label and input for Teams -->
+  <div class="form-group">
+    <label for="Teams" class="col-sm-2 control-label">
+      Teams
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="Teams" name="Teams" placeholder="Teams" class="form-control" value="<%= @league.Teams %>">
+    </div>
+  </div>
+
+  <!-- Label and input for Budget -->
+  <div class="form-group">
+    <label for="Budget" class="col-sm-2 control-label">
+      Budget
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="Budget" name="Budget" placeholder="Budget" class="form-control" value="<%= @league.Budget %>">
+    </div>
+  </div>
+
+  <!-- Label and input for Bench -->
+  <div class="form-group">
+    <label for="Bench" class="col-sm-2 control-label">
+      Bench
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="Bench" name="Bench" placeholder="Bench" class="form-control" value="<%= @league.Bench %>">
+    </div>
+  </div>
+
+  <!-- Label and input for PaTd -->
+  <div class="form-group">
+    <label for="PaTd" class="col-sm-2 control-label">
+      Patd
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="PaTd" name="PaTd" placeholder="Patd" class="form-control" value="<%= @league.PaTd %>">
+    </div>
+  </div>
+
+  <!-- Label and input for PaYd -->
+  <div class="form-group">
+    <label for="PaYd" class="col-sm-2 control-label">
+      Payd
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="PaYd" name="PaYd" placeholder="Payd" class="form-control" value="<%= @league.PaYd %>">
+    </div>
+  </div>
+
+  <!-- Label and input for PaInt -->
+  <div class="form-group">
+    <label for="PaInt" class="col-sm-2 control-label">
+      Paint
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="PaInt" name="PaInt" placeholder="Paint" class="form-control" value="<%= @league.PaInt %>">
+    </div>
+  </div>
+
+  <!-- Label and input for RuTd -->
+  <div class="form-group">
+    <label for="RuTd" class="col-sm-2 control-label">
+      Rutd
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="RuTd" name="RuTd" placeholder="Rutd" class="form-control" value="<%= @league.RuTd %>">
+    </div>
+  </div>
+
+  <!-- Label and input for RuYd -->
+  <div class="form-group">
+    <label for="RuYd" class="col-sm-2 control-label">
+      Ruyd
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="RuYd" name="RuYd" placeholder="Ruyd" class="form-control" value="<%= @league.RuYd %>">
+    </div>
+  </div>
+
+  <!-- Label and input for Rec -->
+  <div class="form-group">
+    <label for="Rec" class="col-sm-2 control-label">
+      Rec
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="Rec" name="Rec" placeholder="Rec" class="form-control" value="<%= @league.Rec %>">
+    </div>
+  </div>
+
+  <!-- Label and input for RecTd -->
+  <div class="form-group">
+    <label for="RecTd" class="col-sm-2 control-label">
+      Rectd
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="RecTd" name="RecTd" placeholder="Rectd" class="form-control" value="<%= @league.RecTd %>">
+    </div>
+  </div>
+
+  <!-- Label and input for ReYd -->
+  <div class="form-group">
+    <label for="ReYd" class="col-sm-2 control-label">
+      Reyd
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="ReYd" name="ReYd" placeholder="Reyd" class="form-control" value="<%= @league.ReYd %>">
+    </div>
+  </div>
+
+  <!-- Label and input for Fum -->
+  <div class="form-group">
+    <label for="Fum" class="col-sm-2 control-label">
+      Fum
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="Fum" name="Fum" placeholder="Fum" class="form-control" value="<%= @league.Fum %>">
+    </div>
+  </div>
+
+  <!-- Label and input for Comp -->
+  <div class="form-group">
+    <label for="Comp" class="col-sm-2 control-label">
+      Comp
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="Comp" name="Comp" placeholder="Comp" class="form-control" value="<%= @league.Comp %>">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <input type="submit" value="Create League" class="btn btn-primary">
+    </div>
+  </div>
+</form>

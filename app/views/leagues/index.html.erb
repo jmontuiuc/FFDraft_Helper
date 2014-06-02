@@ -1,0 +1,82 @@
+<div class="page-header">
+  <h1>Leagues</h1>
+</div>
+
+<p><a href="/leagues/new" class="btn btn-primary">Add a New League</a></p>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>League name</th>
+      <th>Qb start</th>
+      <th>Rb start</th>
+      <th>Wr start</th>
+      <th>Te start</th>
+      <th>Flex start</th>
+      <th>K start</th>
+      <th>Def start</th>
+      <th>Start percent</th>
+      <th>Teams</th>
+      <th>Budget</th>
+      <th>Bench</th>
+      <th>Patd</th>
+      <th>Payd</th>
+      <th>Paint</th>
+      <th>Rutd</th>
+      <th>Ruyd</th>
+      <th>Rec</th>
+      <th>Rectd</th>
+      <th>Reyd</th>
+      <th>Fum</th>
+      <th>Comp</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @leagues.each do |league| %>
+      <tr>
+        <td><%= league.league_name %></td>
+        <td><%= league.QB_start %></td>
+        <td><%= league.RB_start %></td>
+        <td><%= league.WR_start %></td>
+        <td><%= league.TE_start %></td>
+        <td><%= league.Flex_start %></td>
+        <td><%= league.K_start %></td>
+        <td><%= league.Def_start %></td>
+        <td><%= league.Start_percent %></td>
+        <td><%= league.Teams %></td>
+        <td><%= league.Budget %></td>
+        <td><%= league.Bench %></td>
+        <td><%= league.PaTd %></td>
+        <td><%= league.PaYd %></td>
+        <td><%= league.PaInt %></td>
+        <td><%= league.RuTd %></td>
+        <td><%= league.RuYd %></td>
+        <td><%= league.Rec %></td>
+        <td><%= league.RecTd %></td>
+        <td><%= league.ReYd %></td>
+        <td><%= league.Fum %></td>
+        <td><%= league.Comp %></td>
+        <td>
+          <a href="/leagues/<%= league.id %>" class="btn btn-primary">
+            <i class="fa fa-search-plus"></i>
+          </a>
+        </td>
+        <td>
+          <a href="/leagues/<%= league.id %>/edit" class="btn btn-warning">
+            <i class="fa fa-edit"></i>
+          </a>
+        </td>
+        <td>
+          <a href="/delete_league/<%= league.id %>" class="btn btn-danger">
+            <i class="fa fa-trash-o"></i>
+          </a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
