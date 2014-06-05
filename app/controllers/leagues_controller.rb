@@ -1,6 +1,6 @@
 class LeaguesController < ApplicationController
   def index
-    @leagues = League.all
+    @leagues = current_user.leagues.all
   end
 
   def show

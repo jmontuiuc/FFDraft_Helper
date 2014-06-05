@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'tzinfo-data'
+
 gem 'devise'
 
 gem 'starter_generators', :git => "git://github.com/rbetina/starter_generators.git", :branch => "kiei925"

@@ -1,5 +1,22 @@
 Rails.application.routes.draw do
 
+  # Routes for the Player_projection resource:
+  # CREATE
+  get('/player_projections/new', { :controller => 'player_projections', :action => 'new' })
+  get('/create_player_projection', { :controller => 'player_projections', :action => 'create' })
+
+  # READ
+  get('/player_projections', { :controller => 'player_projections', :action => 'index' })
+  get('/player_projections/:id', { :controller => 'player_projections', :action => 'show' })
+
+  # UPDATE
+  get('/player_projections/:id/edit', { :controller => 'player_projections', :action => 'edit' })
+  get('/update_player_projection/:id', { :controller => 'player_projections', :action => 'update' })
+
+  # DELETE
+  get('/delete_player_projection/:id', { :controller => 'player_projections', :action => 'destroy' })
+  #------------------------------
+
   devise_for :users
   root 'leagues#index'
 

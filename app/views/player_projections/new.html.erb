@@ -1,0 +1,151 @@
+<div class="page-header">
+  <h1>Add Player Projection</h1>
+</div>
+
+<% if @player_projection.errors.any? %>
+  <% @player_projection.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+
+<form action="/create_player_projection" class="form-horizontal">
+  <!-- Label and input for player -->
+  <div class="form-group">
+    <label for="player" class="col-sm-2 control-label">
+      Player
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="player" name="player" placeholder="Player" class="form-control" value="<%= @player_projection.player %>">
+    </div>
+  </div>
+
+  <!-- Label and input for team -->
+  <div class="form-group">
+    <label for="team" class="col-sm-2 control-label">
+      Team
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="team" name="team" placeholder="Team" class="form-control" value="<%= @player_projection.team %>">
+    </div>
+  </div>
+
+  <!-- Label and input for position -->
+  <div class="form-group">
+    <label for="position" class="col-sm-2 control-label">
+      Position
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="position" name="position" placeholder="Position" class="form-control" value="<%= @player_projection.position %>">
+    </div>
+  </div>
+
+  <!-- Label and input for completions -->
+  <div class="form-group">
+    <label for="completions" class="col-sm-2 control-label">
+      Completions
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="completions" name="completions" placeholder="Completions" class="form-control" value="<%= @player_projection.completions %>">
+    </div>
+  </div>
+
+  <!-- Label and input for pass_yds -->
+  <div class="form-group">
+    <label for="pass_yds" class="col-sm-2 control-label">
+      Pass yds
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="pass_yds" name="pass_yds" placeholder="Pass yds" class="form-control" value="<%= @player_projection.pass_yds %>">
+    </div>
+  </div>
+
+  <!-- Label and input for pass_td -->
+  <div class="form-group">
+    <label for="pass_td" class="col-sm-2 control-label">
+      Pass td
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="pass_td" name="pass_td" placeholder="Pass td" class="form-control" value="<%= @player_projection.pass_td %>">
+    </div>
+  </div>
+
+  <!-- Label and input for interceptions -->
+  <div class="form-group">
+    <label for="interceptions" class="col-sm-2 control-label">
+      Interceptions
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="interceptions" name="interceptions" placeholder="Interceptions" class="form-control" value="<%= @player_projection.interceptions %>">
+    </div>
+  </div>
+
+  <!-- Label and input for rush_yds -->
+  <div class="form-group">
+    <label for="rush_yds" class="col-sm-2 control-label">
+      Rush yds
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="rush_yds" name="rush_yds" placeholder="Rush yds" class="form-control" value="<%= @player_projection.rush_yds %>">
+    </div>
+  </div>
+
+  <!-- Label and input for rush_td -->
+  <div class="form-group">
+    <label for="rush_td" class="col-sm-2 control-label">
+      Rush td
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="rush_td" name="rush_td" placeholder="Rush td" class="form-control" value="<%= @player_projection.rush_td %>">
+    </div>
+  </div>
+
+  <!-- Label and input for receptions -->
+  <div class="form-group">
+    <label for="receptions" class="col-sm-2 control-label">
+      Receptions
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="receptions" name="receptions" placeholder="Receptions" class="form-control" value="<%= @player_projection.receptions %>">
+    </div>
+  </div>
+
+  <!-- Label and input for rec_yds -->
+  <div class="form-group">
+    <label for="rec_yds" class="col-sm-2 control-label">
+      Rec yds
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="rec_yds" name="rec_yds" placeholder="Rec yds" class="form-control" value="<%= @player_projection.rec_yds %>">
+    </div>
+  </div>
+
+  <!-- Label and input for rec_td -->
+  <div class="form-group">
+    <label for="rec_td" class="col-sm-2 control-label">
+      Rec td
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="rec_td" name="rec_td" placeholder="Rec td" class="form-control" value="<%= @player_projection.rec_td %>">
+    </div>
+  </div>
+
+  <!-- Label and input for fumbles -->
+  <div class="form-group">
+    <label for="fumbles" class="col-sm-2 control-label">
+      Fumbles
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="fumbles" name="fumbles" placeholder="Fumbles" class="form-control" value="<%= @player_projection.fumbles %>">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <input type="submit" value="Create Player Projection" class="btn btn-primary">
+    </div>
+  </div>
+</form>
