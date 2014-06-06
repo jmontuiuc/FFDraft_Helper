@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140605183728) do
+ActiveRecord::Schema.define(version: 20140606131128) do
 
   create_table "leagues", force: true do |t|
     t.string   "league_name"
@@ -57,6 +57,11 @@ ActiveRecord::Schema.define(version: 20140605183728) do
     t.integer  "fumbles"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "teams", force: true do |t|
+    t.string  "team"
+    t.integer "bye_week"
   end
 
   create_table "users", force: true do |t|

@@ -90,6 +90,82 @@ TE_projections.each do |te_stat|
 end
 puts "There are now #{TE_projections.count} TEs in the projections table."
 
+BYE_url = "http://www.fantasyfootballnerd.com/service/byes/json/7zj927bzqp9k/"
+BYE_raw_data = open(BYE_url).read
+BYE_parsed_data = JSON.parse(BYE_raw_data)
+BYE_4 = BYE_parsed_data["Bye Week 4"]
+BYE_5 = BYE_parsed_data["Bye Week 5"]
+BYE_6 = BYE_parsed_data["Bye Week 6"]
+BYE_7 = BYE_parsed_data["Bye Week 7"]
+BYE_8 = BYE_parsed_data["Bye Week 8"]
+BYE_9 = BYE_parsed_data["Bye Week 9"]
+BYE_10 = BYE_parsed_data["Bye Week 10"]
+BYE_11 = BYE_parsed_data["Bye Week 11"]
+BYE_12 = BYE_parsed_data["Bye Week 12"]
+
+BYE_4.each do |bye|
+  by = Team.new
+  by.team = bye["team"]
+  by.bye_week = bye["byeWeek"]
+  by.save
+end
+
+BYE_5.each do |bye|
+  by = Team.new
+  by.team = bye["team"]
+  by.bye_week = bye["byeWeek"]
+  by.save
+end
+
+BYE_6.each do |bye|
+  by = Team.new
+  by.team = bye["team"]
+  by.bye_week = bye["byeWeek"]
+  by.save
+end
+
+BYE_7.each do |bye|
+  by = Team.new
+  by.team = bye["team"]
+  by.bye_week = bye["byeWeek"]
+  by.save
+end
+
+BYE_8.each do |bye|
+  by = Team.new
+  by.team = bye["team"]
+  by.bye_week = bye["byeWeek"]
+  by.save
+end
+
+BYE_9.each do |bye|
+  by = Team.new
+  by.team = bye["team"]
+  by.bye_week = bye["byeWeek"]
+  by.save
+end
+
+BYE_10.each do |bye|
+  by = Team.new
+  by.team = bye["team"]
+  by.bye_week = bye["byeWeek"]
+  by.save
+end
+
+BYE_11.each do |bye|
+  by = Team.new
+  by.team = bye["team"]
+  by.bye_week = bye["byeWeek"]
+  by.save
+end
+
+BYE_12.each do |bye|
+  by = Team.new
+  by.team = bye["team"]
+  by.bye_week = bye["byeWeek"]
+  by.save
+end
+puts "Bye weeks updated."
       # t.string :player
       # t.string :team
       # t.string :position
