@@ -74,9 +74,26 @@ class LeaguesController < ApplicationController
     @league.Fum = params[:Fum]
     @league.Comp = params[:Comp]
     @league.user_id = current_user.id
+    @league.RB_starters = (@league.RB_start + @league.Flex_start)* @league.Teams
+    @league.WR_starters = @league.WR_start * @league.Teams
+    @league.QB_starters = @league.QB_start * @league.Teams
+    @league.TE_starters = @league.TE_start * @league.Teams
+    @league.Start_total = @league.RB_starters + @league.WR_starters + @league.QB_starters + @league.TE_starters
+    @league.RB_bench = (@league.RB_starters/@league.Start_total) * (@league.Teams * @league.Bench)
+    @league.WR_bench = (@league.WR_starters/@league.Start_total) * (@league.Teams * @league.Bench)
+    @league.QB_bench = (@league.QB_starters/@league.Start_total) * (@league.Teams * @league.Bench)
+    @league.TE_bench = (@league.TE_starters/@league.Start_total) * (@league.Teams * @league.Bench)
+    @league.Bench_total = @league.RB_bench + @league.WR_bench + @league.QB_bench + @league.TE_bench
+    @league.RB_count = @league.RB_starters + @league.RB_bench
+    @league.WR_count = @league.WR_starters + @league.WR_bench
+    @league.QB_count = @league.QB_starters + @league.QB_bench
+    @league.TE_count = @league.TE_starters + @league.TE_bench
+    @league.K_count = @league.K_start * @league.Teams
+    @league.DEF_count = @league.Def_start * @league.Teams
+    @league.VBD_total = @league.RB_count + @league.WR_count + @league.QB_count + @league.TE_count + @league.K_count + @league.DEF_count
 
     if @league.save
-      redirect_to "/leagues", :notice => "League updated successfully."
+      redirect_to "/leagues/#{params[:id]}", :notice => "League updated successfully."
     else
       render 'edit'
     end

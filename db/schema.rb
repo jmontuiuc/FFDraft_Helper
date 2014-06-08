@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140606131128) do
+ActiveRecord::Schema.define(version: 20140608032710) do
 
   create_table "leagues", force: true do |t|
     t.string   "league_name"
@@ -39,6 +39,29 @@ ActiveRecord::Schema.define(version: 20140606131128) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "RB_starters"
+    t.integer  "WR_starters"
+    t.integer  "QB_starters"
+    t.integer  "TE_starters"
+    t.float    "RB_bench"
+    t.float    "WR_bench"
+    t.float    "QB_bench"
+    t.float    "TE_bench"
+    t.float    "RB_count"
+    t.float    "WR_count"
+    t.float    "QB_count"
+    t.float    "TE_count"
+    t.float    "K_count"
+    t.float    "DEF_count"
+    t.float    "Total_count"
+    t.float    "Team_starter"
+    t.float    "Total_budget"
+    t.float    "StartVBD"
+    t.float    "BenchVBD"
+    t.float    "Bench_percent"
+    t.float    "VBD_total"
+    t.float    "Bench_total"
+    t.float    "Start_total"
   end
 
   create_table "player_projections", force: true do |t|
