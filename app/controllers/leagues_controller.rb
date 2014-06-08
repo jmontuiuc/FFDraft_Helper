@@ -90,7 +90,13 @@ class LeaguesController < ApplicationController
     @league.TE_count = @league.TE_starters + @league.TE_bench
     @league.K_count = @league.K_start * @league.Teams
     @league.DEF_count = @league.Def_start * @league.Teams
-    @league.VBD_total = @league.RB_count + @league.WR_count + @league.QB_count + @league.TE_count + @league.K_count + @league.DEF_count
+    @league.Total_count = @league.RB_count + @league.WR_count + @league.QB_count + @league.TE_count + @league.K_count + @league.DEF_count
+    @league.Team_starter = @league.QB_start + @league.RB_start + @league.WR_start + @league.TE_start + @league.Flex_start + @league.K_start + @league.Def_start
+    @league.Total_budget = (@league.Teams * @league.Budget) - (@league.K_start * @league.Teams) - (@league.Def_start * @league.Teams)
+    # @StartVBD
+    # @BenchVBD
+    @Bench_percent = 1 - @Start_percent
+    # @VBD_total
 
     if @league.save
       redirect_to "/leagues/#{params[:id]}", :notice => "League updated successfully."
