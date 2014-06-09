@@ -60,17 +60,16 @@ class LeaguesController < ApplicationController
     @Bench_percent = 1 - @league.Start_percent
     # @VBD_total
 
-    PlayerProjection.each do |value|
-      @value = FantasyValue.new
-      @value.league_id = @league.id
-      @value.player = value.player
-      @value.fpts = (value.pass_yds * @league.PaYd) + (value.pass_td * @league.PaTd) + (value.interceptions * @league.PaInt) + (value.rush_yds * @league.RuYd) +(value.rush_td * @league.RuTd) + (value.fumbles * @league.Fum) + (value.completions * @league.Comp) + (value.receptions * @league.Rec) + (value.rec_yds * @league.ReYd) + (value.rec_td * @league.RecTd)
-    end
-
-
-
     if @league.save
-      redirect_to "/leagues", :notice => "League created successfully."
+      PlayerProjection.all.each do |value|
+        @value = FantasyValue.new
+        @value.league_id = @league.id
+        @value.player = value.player
+        @value.fpts = (value.pass_yds * @league.PaYd) + (value.pass_td * @league.PaTd) + (value.interceptions * @league.PaInt) + (value.rush_yds * @league.RuYd) +(value.rush_td * @league.RuTd) + (value.fumbles * @league.Fum) + (value.completions * @league.Comp) + (value.receptions * @league.Rec) + (value.rec_yds * @league.ReYd) + (value.rec_td * @league.RecTd)
+        @value.save
+      end
+
+      redirect_to "/leagues/#{params[:id]}", :notice => "League created successfully."
     else
       render 'new'
     end
@@ -140,6 +139,16 @@ class LeaguesController < ApplicationController
     end
 
     if @league.save
+
+      PlayerProjection.all.each do |value|
+        @value = FantasyValue.new
+
+        @value.league_id = @league.id
+        @value.player = value.player
+        @value.fpts = (value.pass_yds * @league.PaYd) + (value.pass_td * @league.PaTd) + (value.interceptions * @league.PaInt) + (value.rush_yds * @league.RuYd) +(value.rush_td * @league.RuTd) + (value.fumbles * @league.Fum) + (value.completions * @league.Comp) + (value.receptions * @league.Rec) + (value.rec_yds * @league.ReYd) + (value.rec_td * @league.RecTd)
+        @value.save
+      end
+
       redirect_to "/leagues/#{params[:id]}", :notice => "League updated successfully."
     else
       render 'edit'
@@ -147,8 +156,9 @@ class LeaguesController < ApplicationController
   end
 
   def destroy
+    @value = FantasyValue.where(league_id: params[:id])
+    @value.destroy_all
     @league = League.find(params[:id])
-
     @league.destroy
 
     redirect_to "/leagues", :notice => "League deleted."
