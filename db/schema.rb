@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140608032710) do
+ActiveRecord::Schema.define(version: 20140608234907) do
+
+  create_table "fantasy_values", force: true do |t|
+    t.integer "league_id"
+    t.string  "player"
+    t.float   "fpts"
+    t.float   "start_vbd"
+    t.float   "bench_vbd"
+    t.float   "auction_value"
+    t.float   "paid"
+    t.float   "inflated_value"
+  end
 
   create_table "leagues", force: true do |t|
     t.string   "league_name"

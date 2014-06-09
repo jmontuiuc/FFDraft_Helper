@@ -17,6 +17,7 @@ QB_projections = QB_parsed_data["DraftProjections"]
 PlayerProjection.destroy_all
 QB_projections.each do |qb_stat|
   q = PlayerProjection.new
+
   q.player = qb_stat["displayName"]
   q.team = qb_stat["team"]
   q.position = "QB"
@@ -26,6 +27,18 @@ QB_projections.each do |qb_stat|
   q.interceptions = qb_stat["passingInt"]
   q.rush_yds = qb_stat["rushYards"]
   q.rush_td = qb_stat["rushTD"]
+
+  if q.completions.nil? then q.completions = 0 end
+  if q.pass_yds.nil? then q.pass_yds = 0 end
+  if q.pass_td.nil? then q.pass_td = 0 end
+  if q.interceptions.nil? then q.interceptions = 0 end
+  if q.rush_yds.nil? then q.rush_yds = 0 end
+  if q.rush_td.nil? then q.rush_td = 0 end
+  if q.receptions.nil? then q.receptions = 0 end
+  if q.rec_yds.nil? then q.rec_yds = 0 end
+  if q.rec_td.nil? then q.rec_td = 0 end
+  if q.fumbles.nil? then q.fumbles = 0 end
+
   q.save
 end
 puts "There are now #{QB_projections.count} QBs in the projections table."
@@ -37,6 +50,7 @@ RB_projections = RB_parsed_data["DraftProjections"]
 
 RB_projections.each do |rb_stat|
   rb = PlayerProjection.new
+
   rb.player = rb_stat["displayName"]
   rb.team = rb_stat["team"]
   rb.position = "RB"
@@ -46,6 +60,18 @@ RB_projections.each do |rb_stat|
   rb.rec_yds = rb_stat["recYards"]
   rb.rec_td = rb_stat["recTD"]
   rb.fumbles = rb_stat["fumbles"]
+
+  if rb.completions.nil? then rb.completions = 0 end
+  if rb.pass_yds.nil? then rb.pass_yds = 0 end
+  if rb.pass_td.nil? then rb.pass_td = 0 end
+  if rb.interceptions.nil? then rb.interceptions = 0 end
+  if rb.rush_yds.nil? then rb.rush_yds = 0 end
+  if rb.rush_td.nil? then rb.rush_td = 0 end
+  if rb.receptions.nil? then rb.receptions = 0 end
+  if rb.rec_yds.nil? then rb.rec_yds = 0 end
+  if rb.rec_td.nil? then rb.rec_td = 0 end
+  if rb.fumbles.nil? then rb.fumbles = 0 end
+
   rb.save
 end
 puts "There are now #{RB_projections.count} RBs in the projections table."
@@ -57,6 +83,7 @@ WR_projections = WR_parsed_data["DraftProjections"]
 
 WR_projections.each do |wr_stat|
   wr = PlayerProjection.new
+
   wr.player = wr_stat["displayName"]
   wr.team = wr_stat["team"]
   wr.position = "WR"
@@ -66,6 +93,18 @@ WR_projections.each do |wr_stat|
   wr.rec_yds = wr_stat["recYards"]
   wr.rec_td = wr_stat["recTD"]
   wr.fumbles = wr_stat["fumbles"]
+
+  if wr.completions.nil? then wr.completions = 0 end
+  if wr.pass_yds.nil? then wr.pass_yds = 0 end
+  if wr.pass_td.nil? then wr.pass_td = 0 end
+  if wr.interceptions.nil? then wr.interceptions = 0 end
+  if wr.rush_yds.nil? then wr.rush_yds = 0 end
+  if wr.rush_td.nil? then wr.rush_td = 0 end
+  if wr.receptions.nil? then wr.receptions = 0 end
+  if wr.rec_yds.nil? then wr.rec_yds = 0 end
+  if wr.rec_td.nil? then wr.rec_td = 0 end
+  if wr.fumbles.nil? then wr.fumbles = 0 end
+
   wr.save
 end
 puts "There are now #{WR_projections.count} WRs in the projections table."
@@ -77,6 +116,7 @@ TE_projections = TE_parsed_data["DraftProjections"]
 
 TE_projections.each do |te_stat|
   te = PlayerProjection.new
+
   te.player = te_stat["displayName"]
   te.team = te_stat["team"]
   te.position = "TE"
@@ -86,6 +126,18 @@ TE_projections.each do |te_stat|
   te.rec_yds = te_stat["recYards"]
   te.rec_td = te_stat["recTD"]
   te.fumbles = te_stat["fumbles"]
+
+  if te.completions.nil? then te.completions = 0 end
+  if te.pass_yds.nil? then te.pass_yds = 0 end
+  if te.pass_td.nil? then te.pass_td = 0 end
+  if te.interceptions.nil? then te.interceptions = 0 end
+  if te.rush_yds.nil? then te.rush_yds = 0 end
+  if te.rush_td.nil? then te.rush_td = 0 end
+  if te.receptions.nil? then te.receptions = 0 end
+  if te.rec_yds.nil? then te.rec_yds = 0 end
+  if te.rec_td.nil? then te.rec_td = 0 end
+  if te.fumbles.nil? then te.fumbles = 0 end
+
   te.save
 end
 puts "There are now #{TE_projections.count} TEs in the projections table."

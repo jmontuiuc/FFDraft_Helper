@@ -1,5 +1,6 @@
 class League < ActiveRecord::Base
   belongs_to :user
+  belongs_to :player_projection
 
   validates :league_name, :presence => true
   validates :QB_start, :presence => true, numericality: { only_integer: true }
