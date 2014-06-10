@@ -61,13 +61,34 @@ class LeaguesController < ApplicationController
     # @VBD_total
 
     if @league.save
+
       PlayerProjection.all.each do |value|
         @value = FantasyValue.new
         @value.league_id = @league.id
         @value.player = value.player
         @value.fpts = (value.pass_yds * @league.PaYd) + (value.pass_td * @league.PaTd) + (value.interceptions * @league.PaInt) + (value.rush_yds * @league.RuYd) +(value.rush_td * @league.RuTd) + (value.fumbles * @league.Fum) + (value.completions * @league.Comp) + (value.receptions * @league.Rec) + (value.rec_yds * @league.ReYd) + (value.rec_td * @league.RecTd)
+        @value.position = value.position
         @value.save
       end
+
+      @qb_fpts = FantasyValue.where(league_id: '@league.id', position: 'QB').order('fpts DESC')
+      @rb_fpts = FantasyValue.where(league_id: '@league.id', position: 'RB').order('fpts DESC')
+      @wr_fpts = FantasyValue.where(league_id: '@league.id', position: 'WR').order('fpts DESC')
+      @te_fpts = FantasyValue.where(league_id: '@league.id', position: 'TE').order('fpts DESC')
+
+      @top_qb = @qp_fpts.take(@league.QB_starters)
+      @top_rb = @qp_fpts.take(@league.RB_starters)
+      @top_wr = @qp_fpts.take(@league.WR_starters)
+      @top_te = @qp_fpts.take(@league.TE_starters)
+
+      @bench_qb = @qp_fpts.take(@league.QB_count)
+      @bench_rb = @qp_fpts.take(@league.RB_count)
+      @bench_wr = @qp_fpts.take(@league.WR_count)
+      @bench_te = @qp_fpts.take(@league.TE_count)
+
+      # @top_qb.each do |vbd|
+      # @StartVBD = vbd.fpts - @top_qb.last.fpts
+
 
       redirect_to "/leagues/#{params[:id]}", :notice => "League created successfully."
     else
@@ -129,20 +150,10 @@ class LeaguesController < ApplicationController
     @Bench_percent = 1 - @league.Start_percent
     # @VBD_total
 
-    PlayerProjection.all.each do |value|
-      @value = FantasyValue.new
-
-      @value.league_id = @league.id
-      @value.player = value.player
-      @value.fpts = (value.pass_yds * @league.PaYd) + (value.pass_td * @league.PaTd) + (value.interceptions * @league.PaInt) + (value.rush_yds * @league.RuYd) +(value.rush_td * @league.RuTd) + (value.fumbles * @league.Fum) + (value.completions * @league.Comp) + (value.receptions * @league.Rec) + (value.rec_yds * @league.ReYd) + (value.rec_td * @league.RecTd)
-      @value.save
-    end
 
     if @league.save
 
       PlayerProjection.all.each do |value|
-        @value = FantasyValue.new
-
         @value.league_id = @league.id
         @value.player = value.player
         @value.fpts = (value.pass_yds * @league.PaYd) + (value.pass_td * @league.PaTd) + (value.interceptions * @league.PaInt) + (value.rush_yds * @league.RuYd) +(value.rush_td * @league.RuTd) + (value.fumbles * @league.Fum) + (value.completions * @league.Comp) + (value.receptions * @league.Rec) + (value.rec_yds * @league.ReYd) + (value.rec_td * @league.RecTd)
