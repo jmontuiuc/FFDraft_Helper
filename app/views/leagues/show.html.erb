@@ -2,71 +2,30 @@
   <h1><%= @league.league_name %></h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt>League name</dt>
-  <dd><%= @league.league_name %></dd>
+<p><a href="/leagues/new" class="btn btn-primary">Add a New League</a></p>
 
-  <dt>Qb start</dt>
-  <dd><%= @league.QB_start %></dd>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Player</th>
+      <th>Pos</th>
+      <th>Team</th>
+      <th>Bye</th>
+      <th>Auction Value</th>
+    </tr>
+  </thead>
 
-  <dt>Rb start</dt>
-  <dd><%= @league.RB_start %></dd>
-
-  <dt>Wr start</dt>
-  <dd><%= @league.WR_start %></dd>
-
-  <dt>Te start</dt>
-  <dd><%= @league.TE_start %></dd>
-
-  <dt>Flex start</dt>
-  <dd><%= @league.Flex_start %></dd>
-
-  <dt>K start</dt>
-  <dd><%= @league.K_start %></dd>
-
-  <dt>Def start</dt>
-  <dd><%= @league.Def_start %></dd>
-
-  <dt>Start percent</dt>
-  <dd><%= @league.Start_percent %></dd>
-
-  <dt>Teams</dt>
-  <dd><%= @league.Teams %></dd>
-
-  <dt>Budget</dt>
-  <dd><%= @league.Budget %></dd>
-
-  <dt>Bench</dt>
-  <dd><%= @league.Bench %></dd>
-
-  <dt>Patd</dt>
-  <dd><%= @league.PaTd %></dd>
-
-  <dt>Payd</dt>
-  <dd><%= @league.PaYd %></dd>
-
-  <dt>Paint</dt>
-  <dd><%= @league.PaInt %></dd>
-
-  <dt>Rutd</dt>
-  <dd><%= @league.RuTd %></dd>
-
-  <dt>Ruyd</dt>
-  <dd><%= @league.RuYd %></dd>
-
-  <dt>Rec</dt>
-  <dd><%= @league.Rec %></dd>
-
-  <dt>Rectd</dt>
-  <dd><%= @league.RecTd %></dd>
-
-  <dt>Reyd</dt>
-  <dd><%= @league.ReYd %></dd>
-
-  <dt>Fum</dt>
-  <dd><%= @league.Fum %></dd>
-
-  <dt>Comp</dt>
-  <dd><%= @league.Comp %></dd>
-
-</dl>
+  <tbody>
+    <% rank = FantasyValue.where(league_id: @league.id).order('auction_value DESC')%>
+    <% rank.where(league_id: @league.id).each do |auction| %>
+      <tr>
+        <td><%= auction.player %></td>
+        <td><%= auction.position %></td>
+        <% teamName = PlayerProjection.find_by(player: auction.player).team %>
+        <td><%= teamName%></td>
+        <td><%= Team.find_by(team: teamName).bye_week %></td>
+        <td><%= auction.auction_value.to_i %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
