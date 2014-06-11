@@ -13,227 +13,236 @@
 
 <form action="/update_league/<%= @league.id %>" class="form-horizontal">
   <!-- Label and input for league_name -->
-  <div class="form-group">
-    <label for="league_name" class="col-sm-2 control-label">
-      League name
+   <div class="form-group">
+    <label for="league_name" class="col-sm-4 control-label">
+      <strong>LEAGUE NAME</strong>
     </label>
-    <div class="col-sm-10">
+    <div class="col-md-6">
       <input type="text" id="league_name" name="league_name" placeholder="League name" class="form-control" value="<%= @league.league_name %>">
     </div>
   </div>
 
+ <section class="col-md-4">
+  <h3 class="text-center">Roster Information</h3>
   <!-- Label and input for QB_start -->
   <div class="form-group">
-    <label for="QB_start" class="col-sm-2 control-label">
-      Qb start
+    <label for="QB_start" class="col-md-6 control-label">
+      QB
     </label>
-    <div class="col-sm-10">
+    <div class="col-md-3">
       <input type="text" id="QB_start" name="QB_start" placeholder="Qb start" class="form-control" value="<%= @league.QB_start %>">
     </div>
   </div>
 
   <!-- Label and input for RB_start -->
   <div class="form-group">
-    <label for="RB_start" class="col-sm-2 control-label">
-      Rb start
+    <label for="RB_start" class="col-md-6 control-label">
+      RB
     </label>
-    <div class="col-sm-10">
+    <div class="col-md-3">
       <input type="text" id="RB_start" name="RB_start" placeholder="Rb start" class="form-control" value="<%= @league.RB_start %>">
     </div>
   </div>
 
   <!-- Label and input for WR_start -->
   <div class="form-group">
-    <label for="WR_start" class="col-sm-2 control-label">
-      Wr start
+    <label for="WR_start" class="col-md-6 control-label">
+      WR
     </label>
-    <div class="col-sm-10">
+    <div class="col-md-3">
       <input type="text" id="WR_start" name="WR_start" placeholder="Wr start" class="form-control" value="<%= @league.WR_start %>">
     </div>
   </div>
 
   <!-- Label and input for TE_start -->
   <div class="form-group">
-    <label for="TE_start" class="col-sm-2 control-label">
-      Te start
+    <label for="TE_start" class="col-md-6 control-label">
+      TE
     </label>
-    <div class="col-sm-10">
+    <div class="col-md-3">
       <input type="text" id="TE_start" name="TE_start" placeholder="Te start" class="form-control" value="<%= @league.TE_start %>">
     </div>
   </div>
 
   <!-- Label and input for Flex_start -->
   <div class="form-group">
-    <label for="Flex_start" class="col-sm-2 control-label">
-      Flex start
+    <label for="Flex_start" class="col-md-6 control-label">
+      Flex (WR/RB/TE)
     </label>
-    <div class="col-sm-10">
+    <div class="col-md-3">
       <input type="text" id="Flex_start" name="Flex_start" placeholder="Flex start" class="form-control" value="<%= @league.Flex_start %>">
     </div>
   </div>
 
   <!-- Label and input for K_start -->
   <div class="form-group">
-    <label for="K_start" class="col-sm-2 control-label">
-      K start
+    <label for="K_start" class="col-md-6 control-label">
+      K
     </label>
-    <div class="col-sm-10">
+    <div class="col-md-3">
       <input type="text" id="K_start" name="K_start" placeholder="K start" class="form-control" value="<%= @league.K_start %>">
     </div>
   </div>
 
   <!-- Label and input for Def_start -->
   <div class="form-group">
-    <label for="Def_start" class="col-sm-2 control-label">
-      Def start
+    <label for="Def_start" class="col-md-6 control-label">
+      Def
     </label>
-    <div class="col-sm-10">
+    <div class="col-md-3">
       <input type="text" id="Def_start" name="Def_start" placeholder="Def start" class="form-control" value="<%= @league.Def_start %>">
     </div>
   </div>
 
-  <!-- Label and input for Start_percent -->
+  <!-- Label and input for Bench -->
   <div class="form-group">
-    <label for="Start_percent" class="col-sm-2 control-label">
-      Start percent
+    <label for="Bench" class="col-md-6 control-label">
+      Bench
     </label>
-    <div class="col-sm-10">
-      <input type="text" id="Start_percent" name="Start_percent" placeholder="Start percent" class="form-control" value="<%= @league.Start_percent %>">
+    <div class="col-md-3">
+      <input type="text" id="Bench" name="Bench" placeholder="Bench" class="form-control" value="<%= @league.Bench %>">
     </div>
   </div>
+  </section>
 
+  <section class="col-md-3 league">
+    <h3 class="text-center">League Information</h3>
   <!-- Label and input for Teams -->
   <div class="form-group">
-    <label for="Teams" class="col-sm-2 control-label">
-      Teams
+    <label for="Teams" class="col-md-6 control-label">
+      Total Teams
     </label>
-    <div class="col-sm-10">
+    <div class="col-md-4">
       <input type="text" id="Teams" name="Teams" placeholder="Teams" class="form-control" value="<%= @league.Teams %>">
     </div>
   </div>
 
   <!-- Label and input for Budget -->
   <div class="form-group">
-    <label for="Budget" class="col-sm-2 control-label">
+    <label for="Budget" class="col-md-6 control-label">
       Budget
     </label>
-    <div class="col-sm-10">
+    <div class="col-md-4">
       <input type="text" id="Budget" name="Budget" placeholder="Budget" class="form-control" value="<%= @league.Budget %>">
     </div>
   </div>
 
-  <!-- Label and input for Bench -->
+  <!-- Label and input for Start_percent -->
   <div class="form-group">
-    <label for="Bench" class="col-sm-2 control-label">
-      Bench
+    <label for="Start_percent" class="col-md-6 control-label">
+      Start %
     </label>
-    <div class="col-sm-10">
-      <input type="text" id="Bench" name="Bench" placeholder="Bench" class="form-control" value="<%= @league.Bench %>">
+    <div class="col-md-4">
+      <input type="text" id="Start_percent" name="Start_percent" placeholder="Start percent" class="form-control" value="<%= @league.Start_percent %>">
     </div>
   </div>
+  </section>
 
+ <section class="col-md-5">
+    <h3 class="text-center">Scoring Information</h3>
   <!-- Label and input for PaTd -->
   <div class="form-group">
-    <label for="PaTd" class="col-sm-2 control-label">
-      Patd
+    <label for="PaTd" class="col-md-4 control-label">
+      Passing TDs
     </label>
-    <div class="col-sm-10">
-      <input type="text" id="PaTd" name="PaTd" placeholder="Patd" class="form-control" value="<%= @league.PaTd %>">
+    <div class="col-md-4">
+      <input type="text" id="PaTd" name="PaTd" placeholder="points" class="form-control" value="<%= @league.PaTd %>">
     </div>
   </div>
 
   <!-- Label and input for PaYd -->
   <div class="form-group">
-    <label for="PaYd" class="col-sm-2 control-label">
-      Payd
+    <label for="PaYd" class="col-md-4 control-label">
+      Passing Yards
     </label>
-    <div class="col-sm-10">
-      <input type="text" id="PaYd" name="PaYd" placeholder="Payd" class="form-control" value="<%= @league.PaYd %>">
+    <div class="col-md-4">
+      <input type="text" id="PaYd" name="PaYd" placeholder="points per yd" class="form-control" value="<%= @league.PaYd %>">
     </div>
   </div>
 
   <!-- Label and input for PaInt -->
   <div class="form-group">
-    <label for="PaInt" class="col-sm-2 control-label">
-      Paint
+    <label for="PaInt" class="col-md-4 control-label">
+      Passing INTs
     </label>
-    <div class="col-sm-10">
-      <input type="text" id="PaInt" name="PaInt" placeholder="Paint" class="form-control" value="<%= @league.PaInt %>">
+    <div class="col-md-4">
+      <input type="text" id="PaInt" name="PaInt" placeholder="points" class="form-control" value="<%= @league.PaInt %>">
     </div>
   </div>
 
   <!-- Label and input for RuTd -->
   <div class="form-group">
-    <label for="RuTd" class="col-sm-2 control-label">
-      Rutd
+    <label for="RuTd" class="col-md-4 control-label">
+      Rushing TDs
     </label>
-    <div class="col-sm-10">
-      <input type="text" id="RuTd" name="RuTd" placeholder="Rutd" class="form-control" value="<%= @league.RuTd %>">
+    <div class="col-md-4">
+      <input type="text" id="RuTd" name="RuTd" placeholder="points" class="form-control" value="<%= @league.RuTd %>">
     </div>
   </div>
 
   <!-- Label and input for RuYd -->
   <div class="form-group">
-    <label for="RuYd" class="col-sm-2 control-label">
-      Ruyd
+    <label for="RuYd" class="col-md-4 control-label">
+      Rushing Yards
     </label>
-    <div class="col-sm-10">
-      <input type="text" id="RuYd" name="RuYd" placeholder="Ruyd" class="form-control" value="<%= @league.RuYd %>">
+    <div class="col-md-4">
+      <input type="text" id="RuYd" name="RuYd" placeholder="points per yd" class="form-control" value="<%= @league.RuYd %>">
     </div>
   </div>
 
   <!-- Label and input for Rec -->
   <div class="form-group">
-    <label for="Rec" class="col-sm-2 control-label">
-      Rec
+    <label for="Rec" class="col-md-4 control-label">
+      Receptions
     </label>
-    <div class="col-sm-10">
-      <input type="text" id="Rec" name="Rec" placeholder="Rec" class="form-control" value="<%= @league.Rec %>">
+    <div class="col-md-4">
+      <input type="text" id="Rec" name="Rec" placeholder="points per rec" class="form-control" value="<%= @league.Rec %>">
     </div>
   </div>
 
   <!-- Label and input for RecTd -->
   <div class="form-group">
-    <label for="RecTd" class="col-sm-2 control-label">
-      Rectd
+    <label for="RecTd" class="col-md-4 control-label">
+      Receiving TDs
     </label>
-    <div class="col-sm-10">
-      <input type="text" id="RecTd" name="RecTd" placeholder="Rectd" class="form-control" value="<%= @league.RecTd %>">
+    <div class="col-md-4">
+      <input type="text" id="RecTd" name="RecTd" placeholder="points" class="form-control" value="<%= @league.RecTd %>">
     </div>
   </div>
 
   <!-- Label and input for ReYd -->
   <div class="form-group">
-    <label for="ReYd" class="col-sm-2 control-label">
-      Reyd
+    <label for="ReYd" class="col-md-4 control-label">
+      Receiving Yards
     </label>
-    <div class="col-sm-10">
-      <input type="text" id="ReYd" name="ReYd" placeholder="Reyd" class="form-control" value="<%= @league.ReYd %>">
+    <div class="col-md-4">
+      <input type="text" id="ReYd" name="ReYd" placeholder="points per yd" class="form-control" value="<%= @league.ReYd %>">
     </div>
   </div>
 
   <!-- Label and input for Fum -->
   <div class="form-group">
-    <label for="Fum" class="col-sm-2 control-label">
-      Fum
+    <label for="Fum" class="col-md-4 control-label">
+      Fumbles Lost
     </label>
-    <div class="col-sm-10">
-      <input type="text" id="Fum" name="Fum" placeholder="Fum" class="form-control" value="<%= @league.Fum %>">
+    <div class="col-md-4">
+      <input type="text" id="Fum" name="Fum" placeholder="points" class="form-control" value="<%= @league.Fum %>">
     </div>
   </div>
 
   <!-- Label and input for Comp -->
   <div class="form-group">
-    <label for="Comp" class="col-sm-2 control-label">
-      Comp
+    <label for="Comp" class="col-md-4 control-label">
+      Completions
     </label>
-    <div class="col-sm-10">
-      <input type="text" id="Comp" name="Comp" placeholder="Comp" class="form-control" value="<%= @league.Comp %>">
+    <div class="col-md-4">
+      <input type="text" id="Comp" name="Comp" placeholder="per com" class="form-control" value="<%= @league.Comp %>">
     </div>
   </div>
+  </section>
 
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="text-center">
       <input type="submit" value="Update League" class="btn btn-primary">
     </div>
   </div>
