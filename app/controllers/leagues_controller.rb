@@ -72,7 +72,7 @@ class LeaguesController < ApplicationController
         @value.save
       end
 
-      # FantasyValue.where(league_id: @league.id).all.each do |value|
+      # @league.fantasy_values.all.each do |value|
       # @project = PlayerProjection.find_by(player: value.player)
       # value.fpts = (@project.pass_yds * @league.PaYd) + (@project.pass_td * @league.PaTd) + (@project.interceptions * @league.PaInt) + (@project.rush_yds * @league.RuYd) +(@project.rush_td * @league.RuTd) + (@project.fumbles * @league.Fum) + (@project.completions * @league.Comp) + (@project.receptions * @league.Rec) + (@project.rec_yds * @league.ReYd) + (@project.rec_td * @league.RecTd)
       # if value.start_vbd.nil? then value.start_vbd = 0 end
@@ -96,25 +96,25 @@ class LeaguesController < ApplicationController
       last_testarter = top_te.last
 
       top_qb.each do |vbd|
-         qb = FantasyValue.find_by(league_id: @league.id, player: vbd.player)
+         qb = @league.fantasy_values.find_by(player: vbd.player)
          qb.start_vbd = qb.fpts - last_qbstarter.fpts
          qb.save
       end
 
       top_rb.each do |vbd|
-         rb = FantasyValue.find_by(league_id: @league.id, player: vbd.player)
+         rb = @league.fantasy_values.find_by(player: vbd.player)
          rb.start_vbd = rb.fpts - last_rbstarter.fpts
          rb.save
       end
 
       top_wr.each do |vbd|
-         wr = FantasyValue.find_by(league_id: @league.id, player: vbd.player)
+         wr = @league.fantasy_values.find_by(player: vbd.player)
          wr.start_vbd = wr.fpts - last_wrstarter.fpts
          wr.save
       end
 
       top_te.each do |vbd|
-         te = FantasyValue.find_by(league_id: @league.id, player: vbd.player)
+         te = @league.fantasy_values.find_by(player: vbd.player)
          te.start_vbd = te.fpts - last_testarter.fpts
          te.save
       end
@@ -130,25 +130,25 @@ class LeaguesController < ApplicationController
       last_tebench = bench_te.last
 
       bench_qb.each do |vbd|
-         qb = FantasyValue.find_by(league_id: @league.id, player: vbd.player)
+         qb = @league.fantasy_values.find_by(player: vbd.player)
          qb.bench_vbd = qb.fpts - last_qbbench.fpts
          qb.save
       end
 
       bench_rb.each do |vbd|
-         rb = FantasyValue.find_by(league_id: @league.id, player: vbd.player)
+         rb = @league.fantasy_values.find_by(player: vbd.player)
          rb.bench_vbd = rb.fpts - last_rbbench.fpts
          rb.save
       end
 
       bench_wr.each do |vbd|
-         wr = FantasyValue.find_by(league_id: @league.id, player: vbd.player)
+         wr = @league.fantasy_values.find_by(player: vbd.player)
          wr.bench_vbd = wr.fpts - last_wrbench.fpts
          wr.save
       end
 
       bench_te.each do |vbd|
-         te = FantasyValue.find_by(league_id: @league.id, player: vbd.player)
+         te = @league.fantasy_values.find_by(player: vbd.player)
          te.bench_vbd = te.fpts - last_tebench.fpts
          te.save
       end
@@ -158,14 +158,14 @@ class LeaguesController < ApplicationController
       first_wr = wr_fpts.first
       first_te = te_fpts.first
 
-      @league.StartVBD = FantasyValue.where(league_id: @league.id).sum('start_vbd')
-      @league.BenchVBD = FantasyValue.where(league_id: @league.id).sum('bench_vbd')
+      @league.StartVBD = @league.fantasy_values.sum('start_vbd')
+      @league.BenchVBD = @league.fantasy_values.sum('bench_vbd')
       @league.save
       benchpf = (@league.Total_budget * @league.Bench_percent)/@league.BenchVBD
       starterbudget = (@league.Total_budget * @league.Start_percent)-(((first_qb.bench_vbd - first_qb.start_vbd) * @league.QB_starters) - ((first_rb.bench_vbd - first_rb.start_vbd) * @league.RB_starters) - ((first_wr.bench_vbd - first_wr.start_vbd) * @league.WR_starters) - ((first_te.bench_vbd - first_te.start_vbd) * @league.TE_starters)) * benchpf
       starterpf = starterbudget/@league.StartVBD
 
-      FantasyValue.where(league_id: @league.id).all.each do |dols|
+      @league.fantasy_values.all.each do |dols|
         dols.auction_value = (dols.bench_vbd - dols.start_vbd)*benchpf + dols.start_vbd*starterpf
         dols.save
       end
@@ -229,7 +229,7 @@ class LeaguesController < ApplicationController
 
     if @league.save
 
-      FantasyValue.where(league_id: @league.id).all.each do |value|
+      @league.fantasy_values.all.each do |value|
       @project = PlayerProjection.find_by(player: value.player)
       value.fpts = (@project.pass_yds * @league.PaYd) + (@project.pass_td * @league.PaTd) + (@project.interceptions * @league.PaInt) + (@project.rush_yds * @league.RuYd) +(@project.rush_td * @league.RuTd) + (@project.fumbles * @league.Fum) + (@project.completions * @league.Comp) + (@project.receptions * @league.Rec) + (@project.rec_yds * @league.ReYd) + (@project.rec_td * @league.RecTd)
       if value.start_vbd.nil? then value.start_vbd = 0 end
@@ -253,25 +253,25 @@ class LeaguesController < ApplicationController
       last_testarter = top_te.last
 
       top_qb.each do |vbd|
-         qb = FantasyValue.find_by(league_id: @league.id, player: vbd.player)
+         qb = @league.fantasy_values.find_by(player: vbd.player)
          qb.start_vbd = qb.fpts - last_qbstarter.fpts
          qb.save
       end
 
       top_rb.each do |vbd|
-         rb = FantasyValue.find_by(league_id: @league.id, player: vbd.player)
+         rb = @league.fantasy_values.find_by(player: vbd.player)
          rb.start_vbd = rb.fpts - last_rbstarter.fpts
          rb.save
       end
 
       top_wr.each do |vbd|
-         wr = FantasyValue.find_by(league_id: @league.id, player: vbd.player)
+         wr = @league.fantasy_values.find_by(player: vbd.player)
          wr.start_vbd = wr.fpts - last_wrstarter.fpts
          wr.save
       end
 
       top_te.each do |vbd|
-         te = FantasyValue.find_by(league_id: @league.id, player: vbd.player)
+         te = @league.fantasy_values.find_by(player: vbd.player)
          te.start_vbd = te.fpts - last_testarter.fpts
          te.save
       end
@@ -287,25 +287,25 @@ class LeaguesController < ApplicationController
       last_tebench = bench_te.last
 
       bench_qb.each do |vbd|
-         qb = FantasyValue.find_by(league_id: @league.id, player: vbd.player)
+         qb = @league.fantasy_values.find_by(player: vbd.player)
          qb.bench_vbd = qb.fpts - last_qbbench.fpts
          qb.save
       end
 
       bench_rb.each do |vbd|
-         rb = FantasyValue.find_by(league_id: @league.id, player: vbd.player)
+         rb = @league.fantasy_values.find_by(player: vbd.player)
          rb.bench_vbd = rb.fpts - last_rbbench.fpts
          rb.save
       end
 
       bench_wr.each do |vbd|
-         wr = FantasyValue.find_by(league_id: @league.id, player: vbd.player)
+         wr = @league.fantasy_values.find_by(player: vbd.player)
          wr.bench_vbd = wr.fpts - last_wrbench.fpts
          wr.save
       end
 
       bench_te.each do |vbd|
-         te = FantasyValue.find_by(league_id: @league.id, player: vbd.player)
+         te = @league.fantasy_values.find_by(player: vbd.player)
          te.bench_vbd = te.fpts - last_tebench.fpts
          te.save
       end
@@ -315,14 +315,14 @@ class LeaguesController < ApplicationController
       first_wr = wr_fpts.first
       first_te = te_fpts.first
 
-      @league.StartVBD = FantasyValue.where(league_id: @league.id).sum('start_vbd')
-      @league.BenchVBD = FantasyValue.where(league_id: @league.id).sum('bench_vbd')
+      @league.StartVBD = @league.fantasy_values.sum('start_vbd')
+      @league.BenchVBD = @league.fantasy_values.sum('bench_vbd')
       @league.save
       benchpf = (@league.Total_budget * @league.Bench_percent)/@league.BenchVBD
       starterbudget = (@league.Total_budget * @league.Start_percent)-(((first_qb.bench_vbd - first_qb.start_vbd) * @league.QB_starters) - ((first_rb.bench_vbd - first_rb.start_vbd) * @league.RB_starters) - ((first_wr.bench_vbd - first_wr.start_vbd) * @league.WR_starters) - ((first_te.bench_vbd - first_te.start_vbd) * @league.TE_starters)) * benchpf
       starterpf = starterbudget/@league.StartVBD
 
-      FantasyValue.where(league_id: @league.id).all.each do |dols|
+      @league.fantasy_values.all.each do |dols|
         dols.auction_value = (dols.bench_vbd - dols.start_vbd)*benchpf + dols.start_vbd*starterpf
         dols.save
       end
