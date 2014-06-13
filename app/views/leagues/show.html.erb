@@ -16,7 +16,7 @@
   </thead>
 
   <tbody>
-    <% rank = FantasyValue.where(league_id: @league.id).order('auction_value DESC')%>
+    <% rank = @league.fantasy_values.order('auction_value DESC')%>
     <% rank.where(league_id: @league.id).each do |auction| %>
       <tr>
         <td><%= auction.player %></td>

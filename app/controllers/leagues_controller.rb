@@ -55,7 +55,7 @@ class LeaguesController < ApplicationController
     @league.Total_count = @league.RB_count + @league.WR_count + @league.QB_count + @league.TE_count + @league.K_count + @league.DEF_count
     @league.Team_starter = @league.QB_start + @league.RB_start + @league.WR_start + @league.TE_start + @league.Flex_start + @league.K_start + @league.Def_start
     @league.Total_budget = (@league.Teams * @league.Budget) - (@league.K_start * @league.Teams) - (@league.Def_start * @league.Teams)
-    @Bench_percent = 1 - @league.Start_percent
+    @league.Bench_percent = 1 - @league.Start_percent
 
     if @league.save
 
@@ -65,8 +65,20 @@ class LeaguesController < ApplicationController
         @value.player = value.player
         @value.fpts = (value.pass_yds * @league.PaYd) + (value.pass_td * @league.PaTd) + (value.interceptions * @league.PaInt) + (value.rush_yds * @league.RuYd) +(value.rush_td * @league.RuTd) + (value.fumbles * @league.Fum) + (value.completions * @league.Comp) + (value.receptions * @league.Rec) + (value.rec_yds * @league.ReYd) + (value.rec_td * @league.RecTd)
         @value.position = value.position
+
+        if @value.start_vbd.nil? then @value.start_vbd = 0 end
+        if @value.bench_vbd.nil? then @value.bench_vbd = 0 end
+
         @value.save
       end
+
+      # FantasyValue.where(league_id: @league.id).all.each do |value|
+      # @project = PlayerProjection.find_by(player: value.player)
+      # value.fpts = (@project.pass_yds * @league.PaYd) + (@project.pass_td * @league.PaTd) + (@project.interceptions * @league.PaInt) + (@project.rush_yds * @league.RuYd) +(@project.rush_td * @league.RuTd) + (@project.fumbles * @league.Fum) + (@project.completions * @league.Comp) + (@project.receptions * @league.Rec) + (@project.rec_yds * @league.ReYd) + (@project.rec_td * @league.RecTd)
+      # if value.start_vbd.nil? then value.start_vbd = 0 end
+      # if value.bench_vbd.nil? then value.bench_vbd = 0 end
+      # value.save
+      # end
 
       qb_fpts = FantasyValue.where(league_id: @league.id, position: 'QB').order('fpts DESC')
       rb_fpts = FantasyValue.where(league_id: @league.id, position: 'RB').order('fpts DESC')
@@ -141,12 +153,20 @@ class LeaguesController < ApplicationController
          te.save
       end
 
+      first_qb = qb_fpts.first
+      first_rb = rb_fpts.first
+      first_wr = wr_fpts.first
+      first_te = te_fpts.first
+
+      @league.StartVBD = FantasyValue.where(league_id: @league.id).sum('start_vbd')
       @league.BenchVBD = FantasyValue.where(league_id: @league.id).sum('bench_vbd')
-      discretionary = @league.Total_budget - @league.Start_total - @league.Bench_total
-      dols_per_point = discretionary/@league.BenchVBD
+      @league.save
+      benchpf = (@league.Total_budget * @league.Bench_percent)/@league.BenchVBD
+      starterbudget = (@league.Total_budget * @league.Start_percent)-(((first_qb.bench_vbd - first_qb.start_vbd) * @league.QB_starters) - ((first_rb.bench_vbd - first_rb.start_vbd) * @league.RB_starters) - ((first_wr.bench_vbd - first_wr.start_vbd) * @league.WR_starters) - ((first_te.bench_vbd - first_te.start_vbd) * @league.TE_starters)) * benchpf
+      starterpf = starterbudget/@league.StartVBD
 
       FantasyValue.where(league_id: @league.id).all.each do |dols|
-        dols.auction_value = dols_per_point * dols.fpts
+        dols.auction_value = (dols.bench_vbd - dols.start_vbd)*benchpf + dols.start_vbd*starterpf
         dols.save
       end
 
@@ -295,8 +315,8 @@ class LeaguesController < ApplicationController
       first_wr = wr_fpts.first
       first_te = te_fpts.first
 
-      @league.StartVBD = FantasyValue.where(league_id: '1').sum('start_vbd')
-      @league.BenchVBD = FantasyValue.where(league_id: '1').sum('bench_vbd')
+      @league.StartVBD = FantasyValue.where(league_id: @league.id).sum('start_vbd')
+      @league.BenchVBD = FantasyValue.where(league_id: @league.id).sum('bench_vbd')
       @league.save
       benchpf = (@league.Total_budget * @league.Bench_percent)/@league.BenchVBD
       starterbudget = (@league.Total_budget * @league.Start_percent)-(((first_qb.bench_vbd - first_qb.start_vbd) * @league.QB_starters) - ((first_rb.bench_vbd - first_rb.start_vbd) * @league.RB_starters) - ((first_wr.bench_vbd - first_wr.start_vbd) * @league.WR_starters) - ((first_te.bench_vbd - first_te.start_vbd) * @league.TE_starters)) * benchpf
